@@ -1,11 +1,18 @@
 import React from "react";
-import { View, Button, Text } from "react-native";
-
+import { View, Text } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 const Over = ({ onHome, stylesApp }) => {
   return (
     <View style={stylesApp.screen}>
-      <Text>Over</Text>
-      <Button title="Home" onPress={onHome} />
+      <Text style={stylesApp.text}>Over</Text>
+      <AntDesign.Button
+        name="rightcircleo"
+        size={24}
+        color="white"
+        onPress={() => onHome("home")}
+      >
+        Over
+      </AntDesign.Button>
     </View>
   );
 };
