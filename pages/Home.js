@@ -1,19 +1,14 @@
-import React from 'react'
-import { View,Text ,StyleSheet} from 'react-native'
+import React, { useRef, useEffect } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-const Home = () => {
-    return (
-        <View style={styles.container}>
-            <Text>Home</Text>
-        </View>
-    )
-}
+const Home = ({ onStart, stylesApp }) => {
+  return (
+    <View style={stylesApp.screen}>
+      <Text>Home</Text>
+      <Button title="Start" onPress={onStart} />
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        alignItems: 'center',
-    }
-})
-export default Home
+const styles = StyleSheet.create({});
+export default Home;
