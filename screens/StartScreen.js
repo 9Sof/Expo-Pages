@@ -7,21 +7,21 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 
 import { CATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/colors";
 
 const StartScreen = (props) => {
+
   const renderCategory = (itemData) => {
     return (
       <TouchableOpacity
         style={styles.gridCategories}
-        onPress={() => props.navigation.navigate("Over")}
+        onPress={() =>
+          props.navigation.navigate("Over", { id: itemData.item.id })
+        }
       >
-        <View>
-          <Text>{itemData.item.title}</Text>
-        </View>
+        <Text>{itemData.item.title}</Text>
       </TouchableOpacity>
     );
   };
@@ -31,23 +31,14 @@ const StartScreen = (props) => {
       <Text style={styles.text}>StartScreen</Text>
       <TextInput style={styles.input} placeholder="Enter your name" />
 
-      <View>
-        <FlatList
-          keyExtractor={(item) => item.id}
-          data={CATEGORIES}
-          renderItem={renderCategory}
-          numColumns={2}
-        />
-      </View>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={CATEGORIES}
+        renderItem={renderCategory}
+        numColumns={2}
+      />
     </View>
   );
-};
-
-StartScreen.navigationOptions = {
-  headerTitle: "Start Screen",
-  headerStyle: {
-    backgroundColor: Colors.primaryColor,
-  },
 };
 
 const styles = StyleSheet.create({
@@ -71,9 +62,6 @@ const styles = StyleSheet.create({
     fontFamily: "debrosee",
   },
   gridCategories: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     padding: 10,
   },
 });
