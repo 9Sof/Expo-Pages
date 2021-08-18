@@ -1,5 +1,12 @@
 import React from "react";
-import { Dimensions, StyleSheet, View, Text, ScrollView } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  Platform,
+} from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import ScreenOrientation from "expo-screen-orientation";
@@ -60,6 +67,7 @@ export default function App() {
   // ScreenOrientation.lockToPortrait(ScreenOrientation.Orientation.PORTRAIT);
   // ScreenOrientation.lockToLandscape(ScreenOrientation.Orientation.LANDSCAPE);
   // กำหนดจอแนวนอน แนวตั้ง
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -83,6 +91,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Platform.OS === "android" ? "white" : "red",
   },
   screen: {
     flex: 1,
