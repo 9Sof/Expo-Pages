@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View, Text } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
@@ -40,6 +40,11 @@ export default function App() {
     <View style={styles.container}>
       <Header title={"APP"} />
       {screen}
+      <View>
+        <Text>1</Text>
+        <Text>1</Text>
+        <Text>1</Text>
+      </View>
     </View>
   );
 }
@@ -53,14 +58,14 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
   },
-  text:{
+  text: {
     padding: 10,
     fontSize: 30,
     fontFamily: "debrosee",
   },
   image: {
-    width: 200,
-    height: 200,
+    width: Dimensions.get("window").width > 1000 ? 500 : "100%",
+    height: Dimensions.get("window").height > 1000 ? "100%" : 200,
     margin: 20,
   },
 });
