@@ -91,7 +91,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Platform.OS === "android" ? "white" : "red",
+    // backgroundColor: Platform.OS === "android" ? "white" : "red",
+    backgroundColor: Platform.select({
+      android: "white",
+      ios: "red",
+    }),
   },
   screen: {
     flex: 1,
