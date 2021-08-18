@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, View, Text, ScrollView } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
+import ScreenOrientation from "expo-screen-orientation";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -31,10 +32,10 @@ export default function App() {
     };
 
     Dimensions.addEventListener("change", updateLayout);
-    console.log("useEffect : ", newWindow);
+    // console.log("useEffect : ", newWindow);
     return () => {
       Dimensions.removeEventListener("change", updateLayout);
-      console.log("return useEffect : ", newWindow);
+      // console.log("return useEffect : ", newWindow);
     };
   });
 
@@ -56,6 +57,9 @@ export default function App() {
 
   let screen = Pages[screenList || "home"];
 
+  // ScreenOrientation.lockToPortrait(ScreenOrientation.Orientation.PORTRAIT);
+  // ScreenOrientation.lockToLandscape(ScreenOrientation.Orientation.LANDSCAPE);
+  // กำหนดจอแนวนอน แนวตั้ง
   return (
     <ScrollView>
       <View style={styles.container}>
