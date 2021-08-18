@@ -6,6 +6,7 @@ import {
   Text,
   ScrollView,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -69,22 +70,24 @@ export default function App() {
   // กำหนดจอแนวนอน แนวตั้ง
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Header title={"APP"} />
-        {screen}
-        <View
-          style={{
-            flex: 1,
-            flexDirection: newWindow.width > 800 ? "row" : "column",
-          }}
-        >
-          <Text>1</Text>
-          <Text>1</Text>
-          <Text>1</Text>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Header title={"APP"} />
+          {screen}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: newWindow.width > 800 ? "row" : "column",
+            }}
+          >
+            <Text>1</Text>
+            <Text>1</Text>
+            <Text>1</Text>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
