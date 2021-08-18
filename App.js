@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, View, Text } from "react-native";
+import { Dimensions, StyleSheet, View, Text, ScrollView } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
@@ -17,6 +17,26 @@ const fetchFonts = () => {
 export default function App() {
   const [screenList, setScreenList] = React.useState("");
   const [fontLoading, setFontLoading] = React.useState(false);
+  const [newWindow, setNewWindow] = React.useState({
+    width: 0,
+    height: 0,
+  });
+
+  React.useEffect(() => {
+    const updateLayout = () => {
+      setNewWindow({
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height,
+      });
+    };
+
+    Dimensions.addEventListener("change", updateLayout);
+    console.log("useEffect : ", newWindow);
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+      console.log("return useEffect : ", newWindow);
+    };
+  });
 
   if (!fontLoading) {
     return (
@@ -37,15 +57,22 @@ export default function App() {
   let screen = Pages[screenList || "home"];
 
   return (
-    <View style={styles.container}>
-      <Header title={"APP"} />
-      {screen}
-      <View>
-        <Text>1</Text>
-        <Text>1</Text>
-        <Text>1</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Header title={"APP"} />
+        {screen}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: newWindow.width > 800 ? "row" : "column",
+          }}
+        >
+          <Text>1</Text>
+          <Text>1</Text>
+          <Text>1</Text>
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -62,6 +89,11 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 30,
     fontFamily: "debrosee",
+  },
+  image: {
+    width: Dimensions.get("window").width > 1000 ? 500 : "100%",
+    height: Dimensions.get("window").height > 1000 ? "100%" : 200,
+    margin: 20,
   },
   image: {
     width: Dimensions.get("window").width > 1000 ? 500 : "100%",
