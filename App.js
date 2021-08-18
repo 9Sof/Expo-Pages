@@ -13,9 +13,11 @@ import AppLoading from "expo-app-loading";
 import ScreenOrientation from "expo-screen-orientation";
 
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import Over from "./pages/Over";
-import Start from "./pages/Start";
+import HomeScreen from "./screens/HomeScreen";
+import OverScreen from "./screens/OverScreen";
+import StartScreen from "./screens/StartScreen";
+
+import HomeNavigator from "./navigation/HomeNavigator";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -58,9 +60,15 @@ export default function App() {
   }
 
   const Pages = {
-    home: <Home onStart={(page) => setScreenList(page)} stylesApp={styles} />,
-    start: <Start onOver={(page) => setScreenList(page)} stylesApp={styles} />,
-    over: <Over onHome={(page) => setScreenList(page)} stylesApp={styles} />,
+    home: (
+      <HomeScreen onStart={(page) => setScreenList(page)} stylesApp={styles} />
+    ),
+    start: (
+      <StartScreen onOver={(page) => setScreenList(page)} stylesApp={styles} />
+    ),
+    over: (
+      <OverScreen onHome={(page) => setScreenList(page)} stylesApp={styles} />
+    ),
   };
 
   let screen = Pages[screenList || "home"];
@@ -69,26 +77,28 @@ export default function App() {
   // ScreenOrientation.lockToLandscape(ScreenOrientation.Orientation.LANDSCAPE);
   // กำหนดจอแนวนอน แนวตั้ง
 
-  return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.container}>
-          <Header title={"APP"} />
-          {screen}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: newWindow.width > 800 ? "row" : "column",
-            }}
-          >
-            <Text>1</Text>
-            <Text>1</Text>
-            <Text>1</Text>
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  // return (
+  //   <SafeAreaView>
+  //     <ScrollView>
+  //       <View style={styles.container}>
+  //         <Header title={"APP"} />
+  //         {screen}
+  //         <View
+  //           style={{
+  //             flex: 1,
+  //             flexDirection: newWindow.width > 800 ? "row" : "column",
+  //           }}
+  //         >
+  //           <Text>1</Text>
+  //           <Text>1</Text>
+  //           <Text>1</Text>
+  //         </View>
+  //       </View>
+  //     </ScrollView>
+  //   </SafeAreaView>
+  // );
+
+  return <HomeNavigator />;
 }
 
 const styles = StyleSheet.create({
