@@ -5,7 +5,10 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Platform } from "react-native";
+import { createDrawerNavigator } from "react-navigation-drawer";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/colors";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import HomeScreen from "../screens/HomeScreen";
@@ -19,21 +22,29 @@ const defaultStackNacOptions = {
     },
   },
 };
+
+const navDrawer = (navData) => (
+  <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    <Item
+      title="menu"
+      iconName="ios-menu"
+      onPress={() => {
+        navData.navigation.toggleDrawer();
+      }}
+    />
+  </HeaderButtons>
+);
+
 const HomeNavigator = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOptions: {
+      navigationOptions: (navData) => ({
+        headerLeft: () => navDrawer(navData),
         headerStyle: { backgroundColor: Colors.primaryColor },
-      },
+      }),
     },
     Over: OverScreen,
-    Start: {
-      screen: StartScreen,
-      navigationOptions: {
-        headerStyle: { backgroundColor: Colors.primaryColor },
-      },
-    },
   },
   {
     defaultNavigationOptions: defaultStackNacOptions,
@@ -44,10 +55,11 @@ const FavNavigator = createStackNavigator(
   {
     Favorites: {
       screen: FavoriteScreen,
-      navigationOptions: {
+      navigationOptions: (navData) => ({
         title: "My Favorites",
+        headerLeft: () => navDrawer(navData),
         headerStyle: { backgroundColor: Colors.accentColor },
-      },
+      }),
     },
     Over: OverScreen,
   },
@@ -78,7 +90,7 @@ const tabScreenConfig = {
   },
 };
 
-const HomeTabNavigator =
+const HomeFavTabNavigator =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeTintColor: "white",
@@ -92,4 +104,32 @@ const HomeTabNavigator =
           activeTintColor: Colors.accentColor,
         },
       });
-export default createAppContainer(HomeTabNavigator);
+const StartNavigator = createStackNavigator({
+  Start: {
+    screen: StartScreen,
+    navigationOptions: (navData) => ({
+      headerTitle: "Start",
+      headerLeft: () => navDrawer(navData),
+      headerStyle: { backgroundColor: Colors.primaryColor },
+    }),
+  },
+});
+
+const MainNavigator = createDrawerNavigator(
+  {
+    HomeFavs: {
+      screen: HomeFavTabNavigator,
+      navigationOptions: {
+        drawerLabel: "Home",
+      },
+    },
+    Start: StartNavigator,
+  },
+  {
+    contentOptions: {
+      activeTintColor: "orange",
+    },
+  }
+);
+
+export default createAppContainer(MainNavigator);

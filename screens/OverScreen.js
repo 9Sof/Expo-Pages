@@ -5,6 +5,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { CATEGORIES } from "../data/dummy-data";
 import HeaderButton from "../components/HeaderButton";
+import colors from "../constants/colors";
 
 const OverScreen = (props) => {
   const paramsId = props.navigation.getParam("id");
@@ -21,6 +22,7 @@ const OverScreen = (props) => {
         <Item
           title="Favorite"
           iconName="ios-star"
+          color={colors.accentColor}
           onPress={() => console.log("Favorite")}
         />
       </HeaderButtons>

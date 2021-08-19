@@ -3,18 +3,10 @@ import { Dimensions, View, Text, StyleSheet, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 const HomeScreen = (props) => {
-
   return (
     <View style={styles.screen}>
       <Text style={styles.text}>HomeScreen</Text>
-      <AntDesign.Button
-        name="rightcircleo"
-        size={24}
-        color="white"
-        onPress={() => props.navigation.navigate("Start")}
-      >
-        StartScreen
-      </AntDesign.Button>
+
       <Image
         style={styles.image}
         //   source={require("../assets/icon.png")}
