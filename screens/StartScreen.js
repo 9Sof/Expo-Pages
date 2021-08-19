@@ -7,12 +7,15 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { useSelector } from "react-redux";
 
 import { CATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/colors";
 
 const StartScreen = (props) => {
 
+  const availableCategories = useSelector(state => state.categories);
+  console.log(availableCategories);
   const renderCategory = (itemData) => {
     return (
       <TouchableOpacity
