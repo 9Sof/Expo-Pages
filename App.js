@@ -1,23 +1,18 @@
 import React from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  Platform,
-  SafeAreaView,
-} from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import ScreenOrientation from "expo-screen-orientation";
+// import { useScreens } from "react-native-screens";
 
-import Header from "./components/Header";
+import Header from "./components/HeaderButton";
 import HomeScreen from "./screens/HomeScreen";
 import OverScreen from "./screens/OverScreen";
 import StartScreen from "./screens/StartScreen";
 
 import HomeNavigator from "./navigation/HomeNavigator";
+
+// useScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -77,38 +72,17 @@ export default function App() {
   // ScreenOrientation.lockToLandscape(ScreenOrientation.Orientation.LANDSCAPE);
   // กำหนดจอแนวนอน แนวตั้ง
 
-  // return (
-  //   <SafeAreaView>
-  //     <ScrollView>
-  //       <View style={styles.container}>
-  //         <Header title={"APP"} />
-  //         {screen}
-  //         <View
-  //           style={{
-  //             flex: 1,
-  //             flexDirection: newWindow.width > 800 ? "row" : "column",
-  //           }}
-  //         >
-  //           <Text>1</Text>
-  //           <Text>1</Text>
-  //           <Text>1</Text>
-  //         </View>
-  //       </View>
-  //     </ScrollView>
-  //   </SafeAreaView>
-  // );
-
   return <HomeNavigator />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: Platform.OS === "android" ? "white" : "red",
-    backgroundColor: Platform.select({
-      android: "white",
-      ios: "red",
-    }),
+    backgroundColor: Platform.OS === "android" ? "white" : "red",
+    // backgroundColor: Platform.select({
+    //   android: "white",
+    //   ios: "red",
+    // }),
   },
   screen: {
     flex: 1,

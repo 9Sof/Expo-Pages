@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { CATEGORIES } from "../data/dummy-data";
+import HeaderButton from "../components/HeaderButton";
 
 const OverScreen = (props) => {
   const paramsId = props.navigation.getParam("id");
@@ -14,6 +16,15 @@ const OverScreen = (props) => {
     headerStyle: {
       backgroundColor: Category.color,
     },
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Favorite"
+          iconName="ios-star"
+          onPress={() => console.log("Favorite")}
+        />
+      </HeaderButtons>
+    ),
   };
 
   return (

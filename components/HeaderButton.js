@@ -1,11 +1,18 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { HeaderButton } from "react-navigation-header-buttons";
+import { Ionicons } from "@expo/vector-icons";
 
-const Header = ({ title }) => {
+import colors from "../constants/colors";
+
+const Header = (props) => {
   return (
-    <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    <HeaderButton
+      {...props}
+      IconComponent={Ionicons}
+      iconSize={23}
+      color={colors.primaryColor}
+    />
   );
 };
 
