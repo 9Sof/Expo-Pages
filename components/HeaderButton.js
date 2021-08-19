@@ -11,7 +11,7 @@ const Header = (props) => {
       {...props}
       IconComponent={Ionicons}
       iconSize={23}
-      color={colors.primaryColor}
+      color={colors.accentColor}
     />
   );
 };
