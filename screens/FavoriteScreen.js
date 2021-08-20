@@ -1,11 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
-
+import { View, StyleSheet, Text, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 const FavoriteScreen = (props) => {
+  const favorites = useSelector((state) => state.categories.favorites);
 
   return (
     <View style={styles.screen}>
       <Text>Favorite Screen</Text>
+      <FlatList
+        keyExtractor={(item) => item.id}
+        data={favorites}
+        renderItem={(itemData) => {
+          return <Text style={styles.text}>{itemData.item.title}</Text>;
+        }}
+      />
     </View>
   );
 };

@@ -2,16 +2,29 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useDispatch, useSelector } from "react-redux";
 
-import { CATEGORIES } from "../data/dummy-data";
 import HeaderButton from "../components/HeaderButton";
 import colors from "../constants/colors";
+import { getCategory } from "../store/actions/categories";
 
 const OverScreen = (props) => {
   const paramsId = props.navigation.getParam("id");
   const paramsTitle = props.navigation.getParam("title");
+  const paramsGetCategory = props.navigation.getParam("getCategory");
 
-  const Category = CATEGORIES.find((category) => category.id === paramsId);
+  const Categories = useSelector((state) => state.categories.categories);
+  const Category = Categories.find((category) => category.id === paramsId);
+
+  const dispatch = useDispatch();
+  const getCategoryHandler = () => {
+    dispatch(getCategory(paramsId));
+    console.log(paramsId);
+  };
+
+  React.useEffect(() => {
+    props.navigation.setParams({ getCategory: getCategoryHandler });
+  }, [paramsId]);
 
   OverScreen.navigationOptions = {
     headerTitle: paramsTitle,
@@ -24,7 +37,7 @@ const OverScreen = (props) => {
           title="Favorite"
           iconName="ios-star"
           color={colors.accentColor}
-          onPress={() => console.log("Favorite")}
+          onPress={paramsGetCategory}
         />
       </HeaderButtons>
     ),

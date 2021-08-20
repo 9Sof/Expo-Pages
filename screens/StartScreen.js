@@ -9,8 +9,6 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 
-import { CATEGORIES } from "../data/dummy-data";
-import Colors from "../constants/colors";
 
 const StartScreen = (props) => {
   const Categories = useSelector((state) => state.categories.categories);
