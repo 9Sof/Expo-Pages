@@ -27,7 +27,16 @@ const categoriesReducer = (state = initialState, action) => {
           ...state,
           favorites: state.favorites.concat(favorite),
         };
+      } else {
+        const unFavorite = state.favorites.filter(
+          (fav) => fav.id !== action.categoryId
+        );
+        return {
+          ...state,
+          favorites: unFavorite,
+        };
       }
+
     default:
       return state;
   }

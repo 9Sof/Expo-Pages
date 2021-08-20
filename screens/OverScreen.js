@@ -35,7 +35,7 @@ const OverScreen = (props) => {
         <Item
           title="Favorite"
           iconName="ios-star"
-          color={colors.accentColor}
+          color="orange"
           onPress={getCategoryHandler}
         />
       </HeaderButtons>
