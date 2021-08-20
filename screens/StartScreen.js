@@ -13,15 +13,17 @@ import { CATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/colors";
 
 const StartScreen = (props) => {
+  const Categories = useSelector((state) => state.categories.categories);
 
-  const availableCategories = useSelector(state => state.categories);
-  console.log(availableCategories);
   const renderCategory = (itemData) => {
     return (
       <TouchableOpacity
         style={styles.gridCategories}
         onPress={() =>
-          props.navigation.navigate("Over", { id: itemData.item.id })
+          props.navigation.navigate("Over", {
+            id: itemData.item.id,
+            title: itemData.item.title,
+          })
         }
       >
         <Text>{itemData.item.title}</Text>
@@ -36,7 +38,7 @@ const StartScreen = (props) => {
 
       <FlatList
         keyExtractor={(item) => item.id}
-        data={CATEGORIES}
+        data={Categories}
         renderItem={renderCategory}
         numColumns={2}
       />

@@ -9,11 +9,12 @@ import colors from "../constants/colors";
 
 const OverScreen = (props) => {
   const paramsId = props.navigation.getParam("id");
+  const paramsTitle = props.navigation.getParam("title");
 
   const Category = CATEGORIES.find((category) => category.id === paramsId);
 
   OverScreen.navigationOptions = {
-    headerTitle: Category.title,
+    headerTitle: paramsTitle,
     headerStyle: {
       backgroundColor: Category.color,
     },
@@ -24,6 +25,16 @@ const OverScreen = (props) => {
           iconName="ios-star"
           color={colors.accentColor}
           onPress={() => console.log("Favorite")}
+        />
+      </HeaderButtons>
+    ),
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Back"
+          iconName="ios-arrow-back"
+          color="black"
+          onPress={() => props.navigation.navigate("Start")}
         />
       </HeaderButtons>
     ),
