@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 
-
 const StartScreen = (props) => {
   const Categories = useSelector((state) => state.categories.categories);
 

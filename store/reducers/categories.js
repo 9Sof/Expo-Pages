@@ -37,6 +37,14 @@ const categoriesReducer = (state = initialState, action) => {
         };
       }
 
+    case "DELETE_FAV":
+      const unFavorite = state.favorites.filter(
+        (fav) => fav.id !== action.categoryId
+      );
+      return {
+        ...state,
+        favorites: unFavorite,
+      };
     default:
       return state;
   }

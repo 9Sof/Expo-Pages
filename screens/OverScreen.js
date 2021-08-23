@@ -11,7 +11,6 @@ import { getCategory } from "../store/actions/categories";
 const OverScreen = (props) => {
   const paramsId = props.navigation.getParam("id");
   const paramsTitle = props.navigation.getParam("title");
-  // const paramsGetCategory = props.navigation.getParam("getCategory");
 
   const Categories = useSelector((state) => state.categories.categories);
   const Category = Categories.find((category) => category.id === paramsId);
@@ -20,10 +19,6 @@ const OverScreen = (props) => {
   const getCategoryHandler = () => {
     dispatch(getCategory(paramsId));
   };
-
-  React.useEffect(() => {
-    props.navigation.setParams({ getCategory: getCategoryHandler });
-  }, [paramsId]);
 
   OverScreen.navigationOptions = {
     headerTitle: paramsTitle,
